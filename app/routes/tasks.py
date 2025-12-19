@@ -15,9 +15,9 @@ from uuid import UUID
 from fastapi import APIRouter, Depends, HTTPException, status, Response
 from sqlmodel import Session, select
 
-from db import get_session
+from app.db import get_session
 from models import Task
-from schemas import TaskCreate, TaskUpdate, TaskResponse, TaskListResponse
+from app.schemas import TaskCreate, TaskUpdate, TaskResponse, TaskListResponse
 from auth import AuthenticatedUser, get_verified_user
 
 router = APIRouter(prefix="/api/{user_id}/tasks", tags=["tasks"])
