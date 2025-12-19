@@ -10,8 +10,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from db import create_db_and_tables
-from routes.tasks import router as tasks_router
-from routes.auth import router as auth_router
+from app.routes.tasks import router as tasks_router
+from app.routes.auth import router as auth_router
 
 
 @asynccontextmanager
