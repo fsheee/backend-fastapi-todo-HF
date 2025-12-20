@@ -18,9 +18,9 @@ from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from sqlmodel import Session, select
 from dotenv import load_dotenv
 
-from db import get_session
-from models import User
-from schemas import RegisterInput, LoginInput, AuthResponse, UserResponse
+from app.db import get_session
+from app.models import User
+from app.schemas import RegisterInput, LoginInput, AuthResponse, UserResponse
 
 load_dotenv()
 
