@@ -18,7 +18,7 @@ from sqlmodel import Session, select
 from app.db import get_session
 from app.models import Task
 from app.schemas import TaskCreate, TaskUpdate, TaskResponse, TaskListResponse
-from auth import AuthenticatedUser, get_verified_user
+from app.auth import AuthenticatedUser, get_verified_user
 
 router = APIRouter(prefix="/api/{user_id}/tasks", tags=["tasks"])
 
