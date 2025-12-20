@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-from db import create_db_and_tables
+from app.db import create_db_and_tables
 from app.routes.tasks import router as tasks_router
 from app.routes.auth import router as auth_router
 
