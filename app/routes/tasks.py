@@ -16,7 +16,7 @@ from fastapi import APIRouter, Depends, HTTPException, status, Response
 from sqlmodel import Session, select
 
 from app.db import get_session
-from models import Task
+from app.models import Task
 from app.schemas import TaskCreate, TaskUpdate, TaskResponse, TaskListResponse
 from auth import AuthenticatedUser, get_verified_user
 
