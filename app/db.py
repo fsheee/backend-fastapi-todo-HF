@@ -1,8 +1,6 @@
-from sqlmodel import SQLModel, create_engine
-
+from sqlmodel import SQLModel, Session, create_engine
 # Database connection string (Neon PostgreSQL)
 DATABASE_URL ="postgresql+psycopg://neondb_owner:npg_jCi7XldZ9Dnf@ep-falling-frost-a40mkwy9-pooler.us-east-1.aws.neon.tech/neondb?sslmode=require"
-
 engine = create_engine(DATABASE_URL, echo=True)
 
 def create_db_and_tables():
@@ -37,12 +35,12 @@ def create_db_and_tables():
 #     )
 
 
-# def create_db_and_tables():
-#     """Create all database tables from SQLModel metadata."""
-#     SQLModel.metadata.create_all(engine)
+def create_db_and_tables():
+    """Create all database tables from SQLModel metadata."""
+    SQLModel.metadata.create_all(engine)
 
 
-# def get_session():
-#     """Dependency that provides a database session."""
-#     with Session(engine) as session:
-#         yield session
+def get_session():
+    """Dependency that provides a database session."""
+    with Session(engine) as session:
+        yield session
