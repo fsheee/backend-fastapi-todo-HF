@@ -14,6 +14,8 @@ from app.routes.tasks import router as tasks_router
 from app.routes.auth import router as auth_router
 
 
+create_db_and_tables()
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Application lifespan handler for startup/shutdown events."""
