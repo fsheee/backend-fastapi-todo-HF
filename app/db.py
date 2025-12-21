@@ -1,13 +1,13 @@
-import os
 from sqlmodel import SQLModel, create_engine
 
-DATABASE_URL = os.environ.get("DATABASE_URL")
+# Database connection string (Neon PostgreSQL)
+DATABASE_URL = "DATABASE_URL=postgresql+psycopg://neondb_owner:npg_jCi7XldZ9Dnf@ep-falling-frost-a40mkwy9-pooler.us-east-1.aws.neon.tech/neondb?sslmode=require"
 
-# engine = create_engine(DATABASE_URL, echo=True)
-# def create_db_and_tables():
-#     SQLModel.metadata.create_all(engine)
+engine = create_engine(DATABASE_URL, echo=True)
 
-# """Database connection and session management for Neon PostgreSQL."""
+def create_db_and_tables():
+    SQLModel.metadata.create_all(engine)
+
 
 # import os
 # from sqlmodel import SQLModel, Session, create_engine
