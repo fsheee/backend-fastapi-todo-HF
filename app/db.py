@@ -1,19 +1,18 @@
-from sqlmodel import SQLModel, Session, create_engine
 import os
+from sqlmodel import SQLModel, Session, create_engine
 from dotenv import load_dotenv
 
 load_dotenv()
 
 DATABASE_URL = os.getenv("DATABASE_URL")
 
-engine = create_engine(
-    DATABASE_URL,
-    echo=True,
-    connect_args={"ssl": True}  # Important for pg8000 & Neon
-)
+
+engine = create_engine(DATABASE_URL, echo=True)
 
 def create_db_and_tables():
     SQLModel.metadata.create_all(engine)
+
+
 
 def get_session():
     with Session(engine) as session:
@@ -28,12 +27,6 @@ def get_session():
 
 # # import os
 # # from sqlmodel import SQLModel, Session, create_engine
-# # from dotenv import load_dotenv
-
-# # load_dotenv()
-
-# # DATABASE_URL = os.getenv("DATABASE_URL")
-
 # # # Use SQLite for local development if no DATABASE_URL is set
 # # if not DATABASE_URL:
 # #     DATABASE_URL = "sqlite:///./todo.db"
