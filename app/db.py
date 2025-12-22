@@ -1,7 +1,27 @@
 
 
 
-# # # app/db.py
+# # # app/db.pyimport os
+from sqlmodel import SQLModel, create_engine
+from dotenv import load_dotenv
+from app.models import *
+import os
+
+# Load environment variables from .env
+load_dotenv()
+
+DATABASE_URL = os.getenv("DATABASE_URL")  # Make sure your .env has DATABASE_URL
+
+if not DATABASE_URL:
+    raise ValueError("DATABASE_URL not found in environment variables")
+
+# Create SQLModel engine
+engine = create_engine(DATABASE_URL, echo=True)
+
+# Function to create tables
+def create_db_and_tables():
+    SQLModel.metadata.create_all(engine)
+
 # # from sqlmodel import SQLModel, create_engine, Session
 # # import os
 
