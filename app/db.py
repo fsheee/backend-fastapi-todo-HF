@@ -1,21 +1,74 @@
 import os
 from sqlmodel import SQLModel, create_engine, Session
 from dotenv import load_dotenv
+from urllib.parse import urlparse
+
 
 load_dotenv()
 
+
 DATABASE_URL = os.getenv("DATABASE_URL")
 
-engine = create_engine(DATABASE_URL, echo=True)
+
+def get_engine():
+    """Create SQLAlchemy engine with proper SSL configuration for different environments."""
+    if not DATABASE_URL:
+        raise ValueError("DATABASE_URL environment variable not set")
+    
+    # Parse URL to remove query parameters
+    parsed = urlparse(DATABASE_URL)
+    clean_url = f"{parsed.scheme}://{parsed.netloc}{parsed.path}"
+    
+    # Determine if this is PostgreSQL
+    is_postgres = "postgresql" in clean_url or "postgres" in clean_url
+    
+    if is_postgres:
+        # For PostgreSQL on HF Spaces, add sslmode via connect_args
+        return create_engine(
+            clean_url,
+            echo=True,
+            connect_args={"sslmode": "require"}
+        )
+    else:
+        # For SQLite or other databases
+        return create_engine(
+            clean_url,
+            echo=True,
+            connect_args={"check_same_thread": False}
+        )
+
+
+engine = get_engine()
+
 
 def create_db_and_tables():
     """Create all tables in the database."""
     SQLModel.metadata.create_all(engine)
 
+
 # Dependency for FastAPI routes
 def get_session():
     with Session(engine) as session:
         yield session
+ 
+#import os        
+# from sqlmodel import SQLModel, create_engine, Session
+# from dotenv import load_dotenv
+
+# load_dotenv()
+
+# DATABASE_URL = os.getenv("DATABASE_URL")
+
+# engine = create_engine(DATABASE_URL, echo=True)
+
+# def create_db_and_tables():
+#     """Create all tables in the database."""
+#     SQLModel.metadata.create_all(engine)
+
+# # Dependency for FastAPI routes
+# def get_session():
+#     with Session(engine) as session:
+#         yield session
 
 # # from sqlmodel import SQLModel, create_engine, Session
 # # import os
