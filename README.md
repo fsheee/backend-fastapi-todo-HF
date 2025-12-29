@@ -12,4 +12,4 @@ Check out the deployed backend here: [HF Space Docs](https://afsheenkhi-backend-
 
 For configuration reference, visit: [HF Spaces Config Reference](https://huggingface.co/docs/hub/spaces-config-reference)
 
-Checkout the deployed frontend here: [NEXT.JS_FRONT HAND](https://python-todo-cli-d9n6.vercel.app/)
+Checkout the deployed frontend here: [NEXT.JS_FRONTEND](https://python-todo-cli-d9n6.vercel.app/)
